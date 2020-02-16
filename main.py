@@ -16,27 +16,25 @@ game_exit = False
 
 # River locations from top
 river_locations = [window_height * 0.15, window_height * 0.3,
-                    window_height * 0.45, window_height * 0.6,
-                    window_height * 0.75]
+                   window_height * 0.45, window_height * 0.6,
+                   window_height * 0.75]
 
 # Game window initialisations
 game_display = pygame.display.set_mode((window_width, window_height),
-                                        pygame.FULLSCREEN)
+                                       pygame.FULLSCREEN)
 pygame.display.set_caption("Turtle Crossing")
 clock = pygame.time.Clock()
 
-player = turtleconfig.Turtle();
+player = turtleconfig.Turtle()
 
 # Game loop
 while not game_exit:
 
     # Event loop
     for event in pygame.event.get():
-        
         # Quit condition
         if (event.type == pygame.QUIT):
             quit()
-        
         if (event.type == pygame.KEYDOWN):
 
             # Quit condition
@@ -45,14 +43,14 @@ while not game_exit:
 
             # Player movement
             if (event.key == pygame.K_LEFT):
-                player.speed[0] = -5
+                player.speed[0] = -player.movement_rate
             elif (event.key == pygame.K_RIGHT):
-                player.speed[0] = 5
+                player.speed[0] = player.movement_rate
             elif (event.key == pygame.K_UP):
-                player.speed[1] = -5
+                player.speed[1] = -player.movement_rate
             elif (event.key == pygame.K_DOWN):
-                player.speed[1] = 5
-        
+                player.speed[1] = player.movement_rate
+
         elif (event.type == pygame.KEYUP):
             if (event.key == pygame.K_LEFT or
                     event.key == pygame.K_RIGHT):
@@ -61,14 +59,14 @@ while not game_exit:
                     event.key == pygame.K_DOWN):
                 player.speed[1] = 0
 
-
     # Draw background
-    utility.draw_thing(game_display, 0, 0, window_width, 
-                        window_height, back)
+    utility.draw_thing(game_display, 0, 0,
+                       window_width, window_height, back)
     for location in river_locations:
         utility.draw_thing(game_display, 0, location, window_width,
-                            window_height * 0.07, river)
+                           window_height * 0.07, river)
 
+    print(player.locationx)
     player.move()
     game_display.blit(player.image, player.rect)
 

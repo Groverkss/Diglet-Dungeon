@@ -8,6 +8,7 @@ window_height = 1080
 turtle_width = 50
 turtle_height = 50
 
+
 class Turtle(pygame.sprite.Sprite):
 
     def __init__(self):
@@ -16,12 +17,16 @@ class Turtle(pygame.sprite.Sprite):
         self.image = pygame.image.load("turtle.png")
         self.image = pygame.transform.scale(self.image, (turtle_width,
                                             turtle_height))
-        self.locationx = [0, 0 + turtle_width]
-        self.locationy = [0, 0 + turtle_height]
+        self.locationx = [(window_width / 2) - (turtle_width / 2),
+                          (window_width / 2) - (turtle_width / 2) +
+                          turtle_width]
+        self.locationy = [window_height * 0.9, (window_height * 0.9) +
+                          turtle_height]
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.right = self.locationx[0], self.locationx[1]
         self.rect.top, self.rect.bottom = self.locationy[0], self.locationy[1]
         self.speed = [0, 0]
+        self.movement_rate = 5
 
     def move(self):
         if (self.rect.right + self.speed[0] <= window_width and
