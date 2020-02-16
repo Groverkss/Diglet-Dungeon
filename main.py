@@ -1,11 +1,12 @@
 import pygame
 import utility
+import turtleconfig
 
 pygame.init()
 
 # Color definations
-blue = (0, 255, 255)
-lime = (0, 255, 0)
+back = (0, 0, 0)
+river = (255, 247, 0)
 
 # Game variables
 window_width = 1920
@@ -24,6 +25,7 @@ game_display = pygame.display.set_mode((window_width, window_height),
 pygame.display.set_caption("Turtle Crossing")
 clock = pygame.time.Clock()
 
+player = turtleconfig.Turtle();
 
 # Game loop
 while not game_exit:
@@ -41,12 +43,34 @@ while not game_exit:
             if (event.key == pygame.K_ESCAPE):
                 quit()
 
+            # Player movement
+            if (event.key == pygame.K_LEFT):
+                player.speed[0] = -5
+            elif (event.key == pygame.K_RIGHT):
+                player.speed[0] = 5
+            elif (event.key == pygame.K_UP):
+                player.speed[1] = -5
+            elif (event.key == pygame.K_DOWN):
+                player.speed[1] = 5
+        
+        elif (event.type == pygame.KEYUP):
+            if (event.key == pygame.K_LEFT or
+                    event.key == pygame.K_RIGHT):
+                player.speed[0] = 0
+            elif (event.key == pygame.K_UP or
+                    event.key == pygame.K_DOWN):
+                player.speed[1] = 0
+
+
     # Draw background
     utility.draw_thing(game_display, 0, 0, window_width, 
-                        window_height, lime)
+                        window_height, back)
     for location in river_locations:
         utility.draw_thing(game_display, 0, location, window_width,
-                            window_height * 0.1, blue)
+                            window_height * 0.07, river)
+
+    player.move()
+    game_display.blit(player.image, player.rect)
 
     pygame.display.update()
     clock.tick(frames_per_sec)
