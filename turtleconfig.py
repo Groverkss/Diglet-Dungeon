@@ -11,7 +11,7 @@ location_x = [(window_width / 2) - (turtle_width / 2),
               (window_width / 2) - (turtle_width / 2) +
               turtle_width]
 
-
+# Turtle sprtie definations
 class Turtle(pygame.sprite.Sprite):
 
     def __init__(self, player_number):
