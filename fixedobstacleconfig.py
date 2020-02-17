@@ -14,7 +14,7 @@ obstacle_offset = 0.02
 bottom_obstacle_offset = 0.03
 bank_obstacle_offset = 0.01
 
-# Fixed obstacle locations from top
+# Boundary gate obstacles
 # Obstacle positions in order ->
 # Topleft top
 # Topright top
