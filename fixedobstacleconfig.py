@@ -6,8 +6,8 @@ window_width = 1920
 window_height = 1080
 
 # Obstacle parameters
-obstacle_width = int(window_width * 0.06)
-obstacle_height = int(window_height * 0.1)
+obstacle_width = 70
+obstacle_height = 70
 
 # Offset for fixing distance from top
 obstacle_offset = 0.02
@@ -87,25 +87,25 @@ for obstacle_num in range(fixed_obstacle_count):
                                     (obstacle_num / fixed_obstacle_count),
                                     window_height * 0.52))
 
-boundary_count = 15
-boundary_offset = window_width * 0.95
+boundary_count = 14
+boundary_offset = window_width
 
 for obstacle in range(boundary_count):
-    fixed_obstacle_locations.append((obstacle * (obstacle_width / 2),
+    fixed_obstacle_locations.append((obstacle * (obstacle_width * 0.9),
                                     (turtleconfig.turtle_height * 2) -
                                     window_height * obstacle_offset))
 
-    fixed_obstacle_locations.append((obstacle * (obstacle_width / 2),
+    fixed_obstacle_locations.append((obstacle * (obstacle_width * 0.9),
                                     window_height -
                                     turtleconfig.turtle_height * 4))
 
     fixed_obstacle_locations.append((boundary_offset - (obstacle *
-                                    (obstacle_width / 2)),
+                                    (obstacle_width)),
                                     (turtleconfig.turtle_height * 2) -
                                     window_height * obstacle_offset))
 
     fixed_obstacle_locations.append((boundary_offset - (obstacle *
-                                    (obstacle_width / 2)),
+                                    (obstacle_width)),
                                     window_height -
                                     turtleconfig.turtle_height * 4))
 
@@ -122,4 +122,7 @@ class FixedObstacle(pygame.sprite.Sprite):
                                             obstacle_height))
         self.rect = self.image.get_rect()
 
-        self.rect.topleft = (location_x, locationy)
+        self.rect.top, self.rect.bottom = (locationy, locationy +
+                                           obstacle_height)
+        self.rect.left, self.rect.right = (location_x, location_x +
+                                           obstacle_width)

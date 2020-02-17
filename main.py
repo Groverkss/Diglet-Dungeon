@@ -15,7 +15,7 @@ window_width = 1920
 window_height = 1080
 
 # FPS
-frames_per_sec = 120
+frames_per_sec = 72
 
 # Player sprites
 player1 = turtleconfig.Turtle(1)
@@ -105,6 +105,11 @@ while not game_exit:
     # Draw fixed_obstacles
     for obstacle in fixed_obstacles:
         game_display.blit(obstacle.image, obstacle.rect)
+
+    # Collision check between fixed obstacles and player
+    for obstacle in fixed_obstacles:
+        if (pygame.sprite.collide_rect(player, obstacle)):
+            quit()  # ADD CRASH CONDITION LATER
 
     pygame.display.update()
     clock.tick(frames_per_sec)

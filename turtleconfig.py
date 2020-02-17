@@ -11,6 +11,7 @@ location_x = [(window_width / 2) - (turtle_width / 2),
               (window_width / 2) - (turtle_width / 2) +
               turtle_width]
 
+
 # Turtle sprtie definations
 class Turtle(pygame.sprite.Sprite):
 
@@ -28,7 +29,7 @@ class Turtle(pygame.sprite.Sprite):
             self.image = pygame.transform.rotate(self.image, 180)
 
         # Initial coordinates
-        self.locationx = location_x
+        self.locationx = (location_x[0] - 12, location_x[1] - 12)
 
         if (player_number == 1):
             self.locationy = [window_height * 0.9, (window_height * 0.9) +
