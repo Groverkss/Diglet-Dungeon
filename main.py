@@ -2,7 +2,9 @@ import pygame
 import utility
 import turtleconfig
 import fixedobstacleconfig
+import movingobstacleconfig
 from fixedobstacleconfig import fixed_obstacle_locations
+from movingobstacleconfig import moving_obstacle_locations
 
 pygame.init()
 
@@ -44,11 +46,20 @@ for object_location in fixed_obstacle_locations:
                                                    object_location[1])
     fixed_obstacles.append(new_object)
 
+# Moving obstacle sprtie group
+moving_obstacles = []
+for object_location in moving_obstacle_locations:
+    new_object = movingobstacleconfig.MovingObstacle(object_location[0],
+                                                     object_location[1])
+    moving_obstacles.append(new_object)
+
 # Exit condition checker
 game_exit = False
 
 # Temp arrangement
+# FIX THIS LATER
 player = player1
+diglet = movingobstacleconfig.MovingObstacle(0, 0, 1)
 
 # Game loop
 while not game_exit:
@@ -106,8 +117,17 @@ while not game_exit:
     for obstacle in fixed_obstacles:
         game_display.blit(obstacle.image, obstacle.rect)
 
+    # Draw moving obstacles
+    for obstacle in moving_obstacles:
+        game_display.blit(obstacle.image, obstacle.rect)
+
     # Collision check between fixed obstacles and player
     for obstacle in fixed_obstacles:
+        if (pygame.sprite.collide_rect(player, obstacle)):
+            quit()  # ADD CRASH CONDITION LATER
+
+    # Collision check between moving obstacles and player
+    for obstacle in moving_obstacles:
         if (pygame.sprite.collide_rect(player, obstacle)):
             quit()  # ADD CRASH CONDITION LATER
 
