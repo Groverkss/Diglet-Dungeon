@@ -86,7 +86,7 @@ fixed_obstacles_on_second_bank = 12
 
 # Initialising fixed obstacle count for first banks and offset from left
 fixed_obstacle_count = fixed_obstacles_on_first_bank
-first_bank_offset = window_width / (fixed_obstacle_count + 1)
+first_bank_offset = window_width * 0.05
 # Adding obstacle locations on first banks from both sides
 for obstacle_num in range(fixed_obstacle_count):
     fixed_obstacle_locations.append((first_bank_offset + window_width *
@@ -100,7 +100,7 @@ for obstacle_num in range(fixed_obstacle_count):
 
 # Initialising fixed obstacle count for second bank and offset from left
 fixed_obstacle_count = fixed_obstacles_on_second_bank
-second_bank_offset = window_width / (fixed_obstacle_count + 1)
+second_bank_offset = window_width * 0.02
 # Adding obstacle locations on second banks from both sides
 for obstacle_num in range(fixed_obstacle_count):
     fixed_obstacle_locations.append((second_bank_offset + window_width *

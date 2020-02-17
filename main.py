@@ -33,6 +33,7 @@ game_display = pygame.display.set_mode((window_width, window_height),
                                        pygame.FULLSCREEN)
 pygame.display.set_caption("Turtle Crossing")
 
+
 # Game clock
 clock = pygame.time.Clock()
 
@@ -46,20 +47,19 @@ for object_location in fixed_obstacle_locations:
                                                    object_location[1])
     fixed_obstacles.append(new_object)
 
-# Moving obstacle sprtie group
+# Moving obstacle sprite group
 moving_obstacles = []
 for object_location in moving_obstacle_locations:
     new_object = movingobstacleconfig.MovingObstacle(object_location[0],
-                                                     object_location[1])
+                                                     object_location[1],
+                                                     object_location[2])
     moving_obstacles.append(new_object)
 
 # Exit condition checker
 game_exit = False
 
-# Temp arrangement
-# FIX THIS LATER
+# Initial player
 player = player1
-diglet = movingobstacleconfig.MovingObstacle(0, 0, 1)
 
 # Game loop
 while not game_exit:
@@ -119,6 +119,7 @@ while not game_exit:
 
     # Draw moving obstacles
     for obstacle in moving_obstacles:
+        obstacle.move()
         game_display.blit(obstacle.image, obstacle.rect)
 
     # Collision check between fixed obstacles and player

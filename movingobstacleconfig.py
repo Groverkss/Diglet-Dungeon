@@ -8,10 +8,40 @@ window_height = 1080
 # Obstacle parameters
 obstacle_width = 70
 obstacle_height = 45
-obstacle_speed = 5
+obstacle_speed = 1.5
+obstacle_offset = 0
 
 # Moving obstacle locations from top
 moving_obstacle_locations = []
+
+moving_obstacles_on_odd_rivers = 7
+moving_obstacles_on_even_rivers = 9
+
+
+# Initialising moving obstacle count for first rivers and offset from left
+moving_obstacle_count = moving_obstacles_on_odd_rivers
+# Adding obstacle locations on odd rivers from both sides
+for obstacle_num in range(moving_obstacle_count):
+    moving_obstacle_locations.append((window_width *
+                                    (obstacle_num / moving_obstacle_count),
+                                    (window_height * 0.15), 1))
+    moving_obstacle_locations.append((window_width *
+                                    (obstacle_num / moving_obstacle_count),
+                                    (window_height * 0.45), 1))
+    moving_obstacle_locations.append((window_width *
+                                    (obstacle_num / moving_obstacle_count),
+                                    (window_height * 0.75), 1))
+
+# Initialising moving obstacle count for second rivers and offset from left
+moving_obstacle_count = moving_obstacles_on_even_rivers
+# Adding obstacle locations on even rivers from both sides
+for obstacle_num in range(moving_obstacle_count):
+    moving_obstacle_locations.append((window_width *
+                                    (obstacle_num / moving_obstacle_count),
+                                    (window_height * 0.3), 2))
+    moving_obstacle_locations.append((window_width *
+                                    (obstacle_num / moving_obstacle_count),
+                                    (window_height * 0.6), 2))
 
 
 # Moving obstacle sprite definations
@@ -32,14 +62,23 @@ class MovingObstacle(pygame.sprite.Sprite):
                                            obstacle_width)
         self.speed = obstacle_speed
 
+        self.movement_direction = movement_direction
+
         # if direction is of type 2, go left while moving
-        if (movement_direction == 2):
+        if (self.movement_direction == 2):
             self.speed = -self.speed
 
-        # Method for movement of obstacle
-        def move(self):
-            self.left += self.speed
-            self.right += self.speed
-            if (self.left >= window_width):
-                self.right = 0
-                self.left = self.right - obstacle_width
+    # Method for movement of obstacle
+    def move(self):
+        self.rect.left += self.speed
+        self.rect.right += self.speed
+
+        # Replacement on going offscreen
+        if (self.movement_direction == 1):
+            if (self.rect.left >= window_width):
+                self.rect.right = 0
+                self.rect.left = self.rect.right - obstacle_width
+        else:
+            if (self.rect.right <= 0):
+                self.rect.left = window_width
+                self.rect.right = self.rect.left + obstacle_width
