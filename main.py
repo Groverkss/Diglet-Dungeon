@@ -1,6 +1,7 @@
 import pygame
 import utility
 import turtleconfig
+import finishlineconfig
 import fixedobstacleconfig
 import movingobstacleconfig
 from fixedobstacleconfig import fixed_obstacle_locations
@@ -49,17 +50,69 @@ for object_location in fixed_obstacle_locations:
 
 # Moving obstacle sprite group
 moving_obstacles = []
-for object_location in moving_obstacle_locations:
-    new_object = movingobstacleconfig.MovingObstacle(object_location[0],
-                                                     object_location[1],
-                                                     object_location[2])
-    moving_obstacles.append(new_object)
+
+# Obstacle numbers based on level
+obstacles_on_level = [(6, 9), (9, 8), (9, 11)]
+
+# Current round
+current_level = 0
+
+
+# Initialise moving obstacle sprite group
+def moving_object_init():
+    global current_level
+    global moving_obstacle_locations, moving_obstacles
+
+    movingobstacleconfig.init(obstacles_on_level[current_level][0],
+                              obstacles_on_level[current_level][1])
+    moving_obstacles.clear()
+    for object_location in moving_obstacle_locations:
+        new_object = movingobstacleconfig.MovingObstacle(object_location[0],
+                                                         object_location[1],
+                                                         object_location[2])
+        
+        if (current_level == 0):
+            if (new_object.movement_direction == 1):
+                new_object.speed = 2
+            else:
+                new_object.speed = -2
+        
+        moving_obstacles.append(new_object)
+
+
+moving_object_init()
+
 
 # Exit condition checker
 game_exit = False
 
 # Initial player
 player = player1
+
+# Start text sprite
+start_sprite = finishlineconfig.Start(finishlineconfig.start_bottom_x,
+                                      finishlineconfig.start_bottom_y)
+# End text sprite
+end_sprite = finishlineconfig.End(finishlineconfig.start_top_x,
+                                  finishlineconfig.start_top_y)
+
+
+def change_player():
+    global player, player1, player2, start_sprite, end_sprite, moving_obstacles
+    global current_level
+
+    player.reset()
+    end_sprite.update()
+    start_sprite.update()
+    if player == player1:
+        player = player2
+    else:
+        player = player1
+        current_level += 1
+
+    # Reset the game
+    moving_object_init()
+
 
 # Game loop
 while not game_exit:
@@ -109,10 +162,6 @@ while not game_exit:
     # Move player
     player.move()
 
-    # Update player
-    game_display.blit(player.image, player.rect)
-    game_display.blit(player2.image, player2.rect)
-
     # Draw fixed_obstacles
     for obstacle in fixed_obstacles:
         game_display.blit(obstacle.image, obstacle.rect)
@@ -125,12 +174,37 @@ while not game_exit:
     # Collision check between fixed obstacles and player
     for obstacle in fixed_obstacles:
         if (pygame.sprite.collide_rect(player, obstacle)):
-            quit()  # ADD CRASH CONDITION LATER
+            change_player()
 
     # Collision check between moving obstacles and player
     for obstacle in moving_obstacles:
         if (pygame.sprite.collide_rect(player, obstacle)):
-            quit()  # ADD CRASH CONDITION LATER
+            change_player()
+
+    if (pygame.sprite.collide_rect(player, end_sprite)):
+        change_player()
+
+    # Start and End text
+    game_display.blit(start_sprite.image, start_sprite.rect)
+    game_display.blit(end_sprite.image, end_sprite.rect)
+
+    # Update player
+    game_display.blit(player.image, player.rect)
+
+    font = pygame.font.Font(None, 36)
+    text = font.render("Time:", 1, river)
+    textpos = text.get_rect(centerx=window_width * 0.1, centery=50)
+    game_display.blit(text, textpos)
+
+    font = pygame.font.Font(None, 36)
+    text = font.render("Player1 Score:", 1, river)
+    textpos = text.get_rect(centerx=window_width * 0.7, centery=50)
+    game_display.blit(text, textpos)
+
+    font = pygame.font.Font(None, 36)
+    text = font.render("Player2 Score:", 1, river)
+    textpos = text.get_rect(centerx=window_width * 0.85, centery=50)
+    game_display.blit(text, textpos)
 
     pygame.display.update()
     clock.tick(frames_per_sec)

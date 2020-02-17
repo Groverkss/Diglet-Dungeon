@@ -14,34 +14,42 @@ obstacle_offset = 0
 # Moving obstacle locations from top
 moving_obstacle_locations = []
 
-moving_obstacles_on_odd_rivers = 7
-moving_obstacles_on_even_rivers = 9
 
+# Initialise obstacle locations
+def init(moving_obstacles_on_odd_rivers, moving_obstacles_on_even_rivers):
+    global moving_obstacle_locations
 
-# Initialising moving obstacle count for first rivers and offset from left
-moving_obstacle_count = moving_obstacles_on_odd_rivers
-# Adding obstacle locations on odd rivers from both sides
-for obstacle_num in range(moving_obstacle_count):
-    moving_obstacle_locations.append((window_width *
-                                    (obstacle_num / moving_obstacle_count),
-                                    (window_height * 0.15), 1))
-    moving_obstacle_locations.append((window_width *
-                                    (obstacle_num / moving_obstacle_count),
-                                    (window_height * 0.45), 1))
-    moving_obstacle_locations.append((window_width *
-                                    (obstacle_num / moving_obstacle_count),
-                                    (window_height * 0.75), 1))
+    # Clear the list
+    moving_obstacle_locations.clear()
+    # Initialising moving obstacle count for first rivers and offset from left
+    moving_obstacle_count = moving_obstacles_on_odd_rivers
+    # Adding obstacle locations on odd rivers from both sides
+    for obstacle_num in range(moving_obstacle_count):
+        moving_obstacle_locations.append((window_width *
+                                         (obstacle_num /
+                                          moving_obstacle_count),
+                                         (window_height * 0.15), 1))
+        moving_obstacle_locations.append((window_width *
+                                         (obstacle_num /
+                                          moving_obstacle_count),
+                                         (window_height * 0.45), 1))
+        moving_obstacle_locations.append((window_width *
+                                         (obstacle_num /
+                                          moving_obstacle_count),
+                                         (window_height * 0.75), 1))
 
-# Initialising moving obstacle count for second rivers and offset from left
-moving_obstacle_count = moving_obstacles_on_even_rivers
-# Adding obstacle locations on even rivers from both sides
-for obstacle_num in range(moving_obstacle_count):
-    moving_obstacle_locations.append((window_width *
-                                    (obstacle_num / moving_obstacle_count),
-                                    (window_height * 0.3), 2))
-    moving_obstacle_locations.append((window_width *
-                                    (obstacle_num / moving_obstacle_count),
-                                    (window_height * 0.6), 2))
+    # Initialising moving obstacle count for second rivers and offset from left
+    moving_obstacle_count = moving_obstacles_on_even_rivers
+    # Adding obstacle locations on even rivers from both sides
+    for obstacle_num in range(moving_obstacle_count):
+        moving_obstacle_locations.append((window_width *
+                                         (obstacle_num /
+                                          moving_obstacle_count),
+                                         (window_height * 0.3), 2))
+        moving_obstacle_locations.append((window_width *
+                                         (obstacle_num /
+                                          moving_obstacle_count),
+                                         (window_height * 0.6), 2))
 
 
 # Moving obstacle sprite definations

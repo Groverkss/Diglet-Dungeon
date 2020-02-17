@@ -31,7 +31,7 @@ bank_obstacle_offset = 0.01
 fixed_obstacle_locations = [(turtleconfig.location_x[0] -
                             (2 * turtleconfig.turtle_width), 0 -
                             window_height * obstacle_offset),
-           
+
                             (turtleconfig.location_x[1], 0 -
                             window_height * obstacle_offset),
 

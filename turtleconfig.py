@@ -63,3 +63,14 @@ class Turtle(pygame.sprite.Sprite):
                 self.rect.top + self.speed[1] >= 0):
             self.rect.top += self.speed[1]
             self.rect.bottom += self.speed[1]
+
+    # Resets coordinates and speed
+    def reset(self):
+
+        # Initial image placement
+        self.rect = self.image.get_rect()
+        self.rect.left, self.rect.right = self.locationx[0], self.locationx[1]
+        self.rect.top, self.rect.bottom = self.locationy[0], self.locationy[1]
+
+        # Initial speed
+        self.speed = [0, 0]
