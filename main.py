@@ -8,11 +8,12 @@ pygame.init()
 back = (0, 0, 0)
 river = (255, 247, 0)
 
-# Game variables
+# Game window dimensions
 window_width = 1920
 window_height = 1080
+
+# FPS
 frames_per_sec = 60
-game_exit = False
 
 # River locations from top
 river_locations = [window_height * 0.15, window_height * 0.3,
@@ -23,9 +24,17 @@ river_locations = [window_height * 0.15, window_height * 0.3,
 game_display = pygame.display.set_mode((window_width, window_height),
                                        pygame.FULLSCREEN)
 pygame.display.set_caption("Turtle Crossing")
+
+# Game clock
 clock = pygame.time.Clock()
 
+# Hide mouse in game window
+pygame.mouse.set_visible(0)
+
 player = turtleconfig.Turtle()
+
+# Exit condition checker
+game_exit = False
 
 # Game loop
 while not game_exit:
@@ -66,7 +75,6 @@ while not game_exit:
         utility.draw_thing(game_display, 0, location, window_width,
                            window_height * 0.07, river)
 
-    print(player.locationx)
     player.move()
     game_display.blit(player.image, player.rect)
 
