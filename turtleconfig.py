@@ -7,11 +7,14 @@ window_height = 1080
 # Turtle parameters
 turtle_width = 50
 turtle_height = 50
+location_x = [(window_width / 2) - (turtle_width / 2),
+              (window_width / 2) - (turtle_width / 2) +
+              turtle_width]
 
 
 class Turtle(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, player_number):
 
         super().__init__()
 
@@ -20,12 +23,19 @@ class Turtle(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (turtle_width,
                                             turtle_height))
 
+        # Flip the image if it is player 2
+        if (player_number == 2):
+            self.image = pygame.transform.rotate(self.image, 180)
+
         # Initial coordinates
-        self.locationx = [(window_width / 2) - (turtle_width / 2),
-                          (window_width / 2) - (turtle_width / 2) +
-                          turtle_width]
-        self.locationy = [window_height * 0.9, (window_height * 0.9) +
-                          turtle_height]
+        self.locationx = location_x
+
+        if (player_number == 1):
+            self.locationy = [window_height * 0.9, (window_height * 0.9) +
+                              turtle_height]
+        else:
+            self.locationy = [window_height * 0.1 - turtle_height,
+                              (window_height * 0.1)]
 
         # Initial image placement
         self.rect = self.image.get_rect()

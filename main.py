@@ -2,6 +2,7 @@ import pygame
 import utility
 import turtleconfig
 import fixedobstacleconfig
+from fixedobstacleconfig import fixed_obstacle_locations
 
 pygame.init()
 
@@ -14,21 +15,40 @@ window_width = 1920
 window_height = 1080
 
 # FPS
-frames_per_sec = 60
+frames_per_sec = 120
 
 # Player sprites
-player1 = turtleconfig.Turtle()
-player2 = turtleconfig.Turtle()
+player1 = turtleconfig.Turtle(1)
+player2 = turtleconfig.Turtle(2)
 
 # River locations from top
 river_locations = [window_height * 0.15, window_height * 0.3,
                    window_height * 0.45, window_height * 0.6,
                    window_height * 0.75]
 
-# Fixed obstacle locations from top
-fixed_obstacle_locations = [(player1.locationx[0] -
-                            (2 * turtleconfig.turtle_width), 0),
-                            (player1.locationx[1], 0)]
+# Initialising fixed obstacle count for first banks and offset from left
+fixed_obstacle_count = fixedobstacleconfig.fixed_obstacles_on_first_bank
+first_bank_offset = window_width / (fixed_obstacle_count + 1)
+# Adding obstacle locations on first banks from both sides
+for obstacle_num in range(fixed_obstacle_count):
+    fixed_obstacle_locations.append((first_bank_offset + window_width *
+                                    (obstacle_num / fixed_obstacle_count),
+                                    window_height * 0.22))
+    fixed_obstacle_locations.append((first_bank_offset + window_width *
+                                    (obstacle_num / fixed_obstacle_count),
+                                    window_height * 0.67))
+
+# Initialising fixed obstacle count for second bank and offset from left
+fixed_obstacle_count = fixedobstacleconfig.fixed_obstacles_on_second_bank
+second_bank_offset = window_width / (fixed_obstacle_count + 1)
+# Adding obstacle locations on second banks from both sides
+for obstacle_num in range(fixed_obstacle_count):
+    fixed_obstacle_locations.append((second_bank_offset + window_width *
+                                    (obstacle_num / fixed_obstacle_count),
+                                    window_height * 0.37))
+    fixed_obstacle_locations.append((second_bank_offset + window_width *
+                                    (obstacle_num / fixed_obstacle_count),
+                                    window_height * 0.52))
 
 # Game window initialisations
 game_display = pygame.display.set_mode((window_width, window_height),
@@ -104,6 +124,7 @@ while not game_exit:
 
     # Update player
     game_display.blit(player.image, player.rect)
+    game_display.blit(player2.image, player2.rect)
 
     # Draw fixed_obstacles
     for obstacle in fixed_obstacles:
