@@ -57,19 +57,23 @@ class MovingObstacle(pygame.sprite.Sprite):
 
     def __init__(self, location_x, locationy, movement_direction):
 
+        # Initialise class as sprite
         super().__init__()
 
+        # Load sprite image
         self.image = pygame.image.load("moving_obstacle.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()
 
+        # Place sprite according to given coordinates
         self.rect.top, self.rect.bottom = (locationy, locationy +
                                            obstacle_height)
         self.rect.left, self.rect.right = (location_x, location_x +
                                            obstacle_width)
-        self.speed = obstacle_speed
 
+        # Set obstacle speed and direction                                   
+        self.speed = obstacle_speed
         self.movement_direction = movement_direction
 
         # if direction is of type 2, go left while moving

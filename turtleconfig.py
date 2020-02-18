@@ -23,6 +23,7 @@ class Turtle(pygame.sprite.Sprite):
 
     def __init__(self, player_number):
 
+        # Initialise class as sprite
         super().__init__()
 
         # Load image and resize it
@@ -39,6 +40,9 @@ class Turtle(pygame.sprite.Sprite):
         # Initial coordinates
         self.locationx = (location_x[0] - 12, location_x[1] - 12)
 
+        # Set position based on player number
+        # Player 1 on bottom of screen
+        # Player 2 on top of screen
         if (player_number == 1):
             self.locationy = [window_height * 0.9, (window_height * 0.9) +
                               turtle_height]
@@ -57,10 +61,13 @@ class Turtle(pygame.sprite.Sprite):
         # Increase in speed on movement in the direction
         self.movement_rate = 2
 
+        # Initialise score of player
         self.score = 0
-
+        
+        # Pointer for the next obstacle which has not been passed yet
         self.current_locate = 0
 
+        # Time variables to keep track of time score of player
         self.time = 0
         self.temp_time = 0
 

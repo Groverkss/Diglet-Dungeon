@@ -149,13 +149,16 @@ class FixedObstacle(pygame.sprite.Sprite):
 
     def __init__(self, location_x, locationy):
 
+        # Initialise class as sprite
         super().__init__()
 
+        # Load image for sprite
         self.image = pygame.image.load("fixed_obstacle.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()
 
+        # Place sprite according to given coordinates
         self.rect.top, self.rect.bottom = (locationy, locationy +
                                            obstacle_height)
         self.rect.left, self.rect.right = (location_x, location_x +

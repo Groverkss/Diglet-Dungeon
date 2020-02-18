@@ -64,6 +64,7 @@ def moving_object_init():
     global current_level
     global moving_obstacle_locations, moving_obstacles
 
+    # Initialise moving obstacle locations based on level
     movingobstacleconfig.init(obstacles_on_level[current_level][0],
                               obstacles_on_level[current_level][1])
     moving_obstacles.clear()
@@ -81,7 +82,7 @@ def moving_object_init():
 
         moving_obstacles.append(new_object)
 
-
+# Call for initialisation of moving obstacles
 moving_object_init()
 
 
@@ -105,11 +106,13 @@ press_start = False
 intro_image = pygame.image.load("intro.jpeg")
 intro_image_rect = intro_image.get_rect()
 
+# Display intro on the screen
 game_display.blit(intro_image, intro_image_rect)
 pygame.display.update()
 
 # Display intro screen while start is not pressed
 while not press_start:
+    # Events check if quit condition is pressed or start condition is pressed
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
             quit()
@@ -129,9 +132,12 @@ def change_player():
     global player, player1, player2, start_sprite, end_sprite, moving_obstacles
     global current_level, prev_time, temp_time, game_exit
 
+    # Save the temporary time for the player on death
+    # And make it 0 for the next level
     player.time += player.temp_time
     player.temp_time = 0
 
+    # Reset the game based
     player.reset()
     end_sprite.update()
     start_sprite.update()
@@ -228,36 +234,43 @@ while not game_exit:
     # Update player
     game_display.blit(player.image, player.rect)
 
+    # Print Time of player 1
     font = pygame.font.Font(None, 36)
     text = font.render("Time Player1: " + str(round(player1.time +
                        player1.temp_time, 2)), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.1, centery=50)
     game_display.blit(text, textpos)
 
+    # Print time of player 2
     font = pygame.font.Font(None, 36)
     text = font.render("Time Player2: " + str(round(player2.time +
                        player2.temp_time, 2)), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.25, centery=50)
     game_display.blit(text, textpos)
 
+    # Print the current level
     font = pygame.font.Font(None, 36)
     text = font.render("Round: " + str(current_level + 1), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.40, centery=50)
     game_display.blit(text, textpos)
 
+    # Print score of player 1
     font = pygame.font.Font(None, 36)
     text = font.render("Player1 Score: " + str(player1.score), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.7, centery=50)
     game_display.blit(text, textpos)
 
+    # Print score of player2
     font = pygame.font.Font(None, 36)
     text = font.render("Player2 Score: " + str(player2.score), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.85, centery=50)
     game_display.blit(text, textpos)
 
+    # Update the display with everything draw
     pygame.display.update()
     clock.tick(frames_per_sec)
 
+# Winner condition
 if (player1.score > player2.score):
     winner = 1
 elif (player1.score < player2.score):
@@ -267,10 +280,12 @@ elif (player1.time < player2.time):
 else:
     winner = 2
 
+# Importing gameover image and drawing it
 ending_image = pygame.image.load("gameover.jpeg")
 ending_image_rect = ending_image.get_rect()
 game_display.blit(ending_image, ending_image_rect)
 
+# Display winner score and time
 font = pygame.font.Font(None, 80)
 if (winner == 1):
     text = font.render("Player 1 wins with score: " + str(player1.score) +
@@ -282,6 +297,7 @@ textpos = text.get_rect(centerx=window_width * 0.5, centery=window_height *
                         0.55)
 game_display.blit(text, textpos)
 
+# Update the display with gameover screen
 pygame.display.update()
 
 # Game over exit condition
@@ -289,6 +305,7 @@ press_exit = False
 
 # Game over screen
 while not press_exit:
+    # Check for exit condition
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
             quit()
