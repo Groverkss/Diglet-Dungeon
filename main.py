@@ -97,10 +97,16 @@ start_sprite = finishlineconfig.Start(finishlineconfig.start_bottom_x,
 end_sprite = finishlineconfig.End(finishlineconfig.start_top_x,
                                   finishlineconfig.start_top_y)
 
+# Recording time start
+prev_time = pygame.time.get_ticks()
 
+# Changes the player on call
 def change_player():
     global player, player1, player2, start_sprite, end_sprite, moving_obstacles
-    global current_level
+    global current_level, prev_time, temp_time
+
+    player.time += player.temp_time
+    player.temp_time = 0
 
     player.reset()
     end_sprite.update()
@@ -110,6 +116,8 @@ def change_player():
     else:
         player = player1
         current_level += 1
+
+    prev_time = pygame.time.get_ticks()
 
     # Reset the game
     moving_object_init()
@@ -162,6 +170,7 @@ while not game_exit:
 
     # Move player
     player.move()
+    player.temp_time = round(((pygame.time.get_ticks() - prev_time) / 1000), 2)
 
     # Draw fixed_obstacles
     for obstacle in fixed_obstacles:
@@ -193,13 +202,20 @@ while not game_exit:
     game_display.blit(player.image, player.rect)
 
     font = pygame.font.Font(None, 36)
-    text = font.render("Time:", 1, river)
+    text = font.render("Time Player1: " + str(round(player1.time +
+                       player1.temp_time, 2)), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.1, centery=50)
     game_display.blit(text, textpos)
 
     font = pygame.font.Font(None, 36)
-    text = font.render("Round: " + str(current_level + 1), 1, river)
+    text = font.render("Time Player2: " + str(round(player2.time +
+                       player2.temp_time, 2)), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.25, centery=50)
+    game_display.blit(text, textpos)
+
+    font = pygame.font.Font(None, 36)
+    text = font.render("Round: " + str(current_level + 1), 1, river)
+    textpos = text.get_rect(centerx=window_width * 0.40, centery=50)
     game_display.blit(text, textpos)
 
     font = pygame.font.Font(None, 36)

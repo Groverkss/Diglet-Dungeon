@@ -61,6 +61,9 @@ class Turtle(pygame.sprite.Sprite):
 
         self.current_locate = 0
 
+        self.time = 0
+        self.temp_time = 0
+
     # Move the sprite according to speed
     def move(self):
 
