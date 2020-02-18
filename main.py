@@ -70,14 +70,14 @@ def moving_object_init():
         new_object = movingobstacleconfig.MovingObstacle(object_location[0],
                                                          object_location[1],
                                                          object_location[2])
-        
+
         # Increase speed on level 1
         if (current_level == 0):
             if (new_object.movement_direction == 1):
                 new_object.speed = 2
             else:
                 new_object.speed = -2
-                
+
         moving_obstacles.append(new_object)
 
 
@@ -97,13 +97,36 @@ start_sprite = finishlineconfig.Start(finishlineconfig.start_bottom_x,
 end_sprite = finishlineconfig.End(finishlineconfig.start_top_x,
                                   finishlineconfig.start_top_y)
 
+# Spacebar not pressed currently
+press_start = False
+
+# Load intro image
+intro_image = pygame.image.load("intro.jpeg")
+intro_image_rect = intro_image.get_rect()
+
+game_display.blit(intro_image, intro_image_rect)
+pygame.display.update()
+
+# Display intro screen while start is not pressed
+while not press_start:
+    for event in pygame.event.get():
+        if (event.type == pygame.QUIT):
+            quit()
+        
+        if (event.type == pygame.KEYDOWN):
+            if (event.key == pygame.K_ESCAPE):
+                quit()
+            if (event.key == pygame.K_SPACE):
+                press_start = True
+
 # Recording time start
 prev_time = pygame.time.get_ticks()
+
 
 # Changes the player on call
 def change_player():
     global player, player1, player2, start_sprite, end_sprite, moving_obstacles
-    global current_level, prev_time, temp_time
+    global current_level, prev_time, temp_time, game_exit
 
     player.time += player.temp_time
     player.temp_time = 0
@@ -115,7 +138,10 @@ def change_player():
         player = player2
     else:
         player = player1
-        current_level += 1
+        if (current_level < 2):
+            current_level += 1
+        else:
+            game_exit = True
 
     prev_time = pygame.time.get_ticks()
 
