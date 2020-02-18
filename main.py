@@ -33,7 +33,7 @@ river_locations = [window_height * 0.15, window_height * 0.3,
 # Game window initialisations
 game_display = pygame.display.set_mode((window_width, window_height),
                                        pygame.FULLSCREEN)
-pygame.display.set_caption("Turtle Crossing")
+pygame.display.set_caption("Diglet Dungeon")
 
 
 # Game clock
