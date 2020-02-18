@@ -1,18 +1,18 @@
 import pygame
 import utility
-import turtleconfig
-import finishlineconfig
-import fixedobstacleconfig
-import movingobstacleconfig
-from fixedobstacleconfig import fixed_obstacle_locations
-from movingobstacleconfig import moving_obstacle_locations
+import turtle
+import finishline
+import fixedobstacle
+import movingobstacle
+from fixedobstacle import fixed_obstacle_locations
+from movingobstacle import moving_obstacle_locations
 from config import *
 
 pygame.init()
 
 # Player sprites
-player1 = turtleconfig.Turtle(1)
-player2 = turtleconfig.Turtle(2)
+player1 = turtle.Turtle(1)
+player2 = turtle.Turtle(2)
 
 # Game window initialisations
 game_display = pygame.display.set_mode((window_width, window_height),
@@ -28,7 +28,7 @@ pygame.mouse.set_visible(0)
 # Fixed obstacle sprite group
 fixed_obstacles = []
 for object_location in fixed_obstacle_locations:
-    new_object = fixedobstacleconfig.FixedObstacle(object_location[0],
+    new_object = fixedobstacle.FixedObstacle(object_location[0],
                                                    object_location[1])
     fixed_obstacles.append(new_object)
 
@@ -44,11 +44,11 @@ def moving_object_init():
     global moving_obstacle_locations, moving_obstacles
 
     # Initialise moving obstacle locations based on level
-    movingobstacleconfig.init(obstacles_on_level[current_level][0],
+    movingobstacle.init(obstacles_on_level[current_level][0],
                               obstacles_on_level[current_level][1])
     moving_obstacles.clear()
     for object_location in moving_obstacle_locations:
-        new_object = movingobstacleconfig.MovingObstacle(object_location[0],
+        new_object = movingobstacle.MovingObstacle(object_location[0],
                                                          object_location[1],
                                                          object_location[2])
 
@@ -71,11 +71,11 @@ game_exit = False
 player = player1
 
 # Start text sprite
-start_sprite = finishlineconfig.Start(finishlineconfig.start_bottom_x,
-                                      finishlineconfig.start_bottom_y)
+start_sprite = finishline.Start(finishline.start_bottom_x,
+                                      finishline.start_bottom_y)
 # End text sprite
-end_sprite = finishlineconfig.End(finishlineconfig.start_top_x,
-                                  finishlineconfig.start_top_y)
+end_sprite = finishline.End(finishline.start_top_x,
+                                  finishline.start_top_y)
 
 # Spacebar not pressed currently
 press_start = False

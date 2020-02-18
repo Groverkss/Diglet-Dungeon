@@ -1,7 +1,7 @@
 import pygame
-from turtleconfig import location_x
-from turtleconfig import turtle_height
-from turtleconfig import turtle_width
+from turtle import location_x
+from turtle import turtle_height
+from turtle import turtle_width
 from config import *
 
 # Obstacle parameters

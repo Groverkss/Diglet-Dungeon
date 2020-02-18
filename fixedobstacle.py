@@ -1,5 +1,5 @@
 import pygame
-import turtleconfig
+import turtle
 from config import *
 
 # Obstacle parameters
@@ -25,56 +25,56 @@ bank_obstacle_offset = 0.01
 # Topright bottom
 # Bottomleft top
 # Bottomright top
-fixed_obstacle_locations = [(turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width), 0 -
+fixed_obstacle_locations = [(turtle.location_x[0] -
+                            (2 * turtle.turtle_width), 0 -
                             window_height * obstacle_offset),
 
-                            (turtleconfig.location_x[1], 0 -
+                            (turtle.location_x[1], 0 -
                             window_height * obstacle_offset),
 
-                            (turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width),
-                            window_height - turtleconfig.turtle_height * 2 +
+                            (turtle.location_x[0] -
+                            (2 * turtle.turtle_width),
+                            window_height - turtle.turtle_height * 2 +
                             window_height * bottom_obstacle_offset),
 
-                            (turtleconfig.location_x[1], window_height -
-                            (turtleconfig.turtle_height * 2) +
+                            (turtle.location_x[1], window_height -
+                            (turtle.turtle_height * 2) +
                             window_height * bottom_obstacle_offset),
 
-                            (turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width),
-                            turtleconfig.turtle_height - window_height *
+                            (turtle.location_x[0] -
+                            (2 * turtle.turtle_width),
+                            turtle.turtle_height - window_height *
                             obstacle_offset),
 
-                            (turtleconfig.location_x[1],
-                            turtleconfig.turtle_height - window_height *
+                            (turtle.location_x[1],
+                            turtle.turtle_height - window_height *
                             obstacle_offset),
 
-                            (turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width),
-                            window_height - (turtleconfig.turtle_height * 3) +
+                            (turtle.location_x[0] -
+                            (2 * turtle.turtle_width),
+                            window_height - (turtle.turtle_height * 3) +
                             window_height * bottom_obstacle_offset),
 
-                            (turtleconfig.location_x[1], window_height -
-                            (turtleconfig.turtle_height * 3) +
+                            (turtle.location_x[1], window_height -
+                            (turtle.turtle_height * 3) +
                             window_height * bottom_obstacle_offset),
 
-                            (turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width),
-                            (turtleconfig.turtle_height * 2) -
+                            (turtle.location_x[0] -
+                            (2 * turtle.turtle_width),
+                            (turtle.turtle_height * 2) -
                             window_height * obstacle_offset),
 
-                            (turtleconfig.location_x[1],
-                            (turtleconfig.turtle_height * 2) -
+                            (turtle.location_x[1],
+                            (turtle.turtle_height * 2) -
                             window_height * obstacle_offset),
 
-                            (turtleconfig.location_x[0] -
-                            (2 * turtleconfig.turtle_width),
-                            window_height - (turtleconfig.turtle_height * 4) +
+                            (turtle.location_x[0] -
+                            (2 * turtle.turtle_width),
+                            window_height - (turtle.turtle_height * 4) +
                             window_height * bottom_obstacle_offset),
 
-                            (turtleconfig.location_x[1], window_height -
-                            (turtleconfig.turtle_height * 4) +
+                            (turtle.location_x[1], window_height -
+                            (turtle.turtle_height * 4) +
                             window_height * bottom_obstacle_offset),
                             ]
 
@@ -121,23 +121,23 @@ boundary_offset = window_width
 # Bottomright
 for obstacle in range(boundary_count):
     fixed_obstacle_locations.append((obstacle * (obstacle_width * 0.9),
-                                    (turtleconfig.turtle_height * 2) -
+                                    (turtle.turtle_height * 2) -
                                     window_height * obstacle_offset))
 
     fixed_obstacle_locations.append((obstacle * (obstacle_width * 0.9),
                                     window_height -
-                                    (turtleconfig.turtle_height * 4) +
+                                    (turtle.turtle_height * 4) +
                                     window_height * bottom_obstacle_offset))
 
     fixed_obstacle_locations.append((boundary_offset - (obstacle *
                                     (obstacle_width)),
-                                    (turtleconfig.turtle_height * 2) -
+                                    (turtle.turtle_height * 2) -
                                     window_height * obstacle_offset))
 
     fixed_obstacle_locations.append((boundary_offset - (obstacle *
                                     (obstacle_width)),
                                     window_height -
-                                    (turtleconfig.turtle_height * 4) +
+                                    (turtle.turtle_height * 4) +
                                     window_height * bottom_obstacle_offset))
 
 

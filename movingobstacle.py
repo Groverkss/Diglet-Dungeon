@@ -1,5 +1,5 @@
 import pygame
-import turtleconfig
+import turtle
 from config import *
 
 # Obstacle parameters
