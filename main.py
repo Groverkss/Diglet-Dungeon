@@ -203,12 +203,12 @@ while not game_exit:
     game_display.blit(text, textpos)
 
     font = pygame.font.Font(None, 36)
-    text = font.render("Player1 Score:", 1, river)
+    text = font.render("Player1 Score: " + str(player1.score), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.7, centery=50)
     game_display.blit(text, textpos)
 
     font = pygame.font.Font(None, 36)
-    text = font.render("Player2 Score:", 1, river)
+    text = font.render("Player2 Score: " + str(player2.score), 1, river)
     textpos = text.get_rect(centerx=window_width * 0.85, centery=50)
     game_display.blit(text, textpos)
 

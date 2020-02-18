@@ -11,6 +11,12 @@ location_x = [(window_width / 2) - (turtle_width / 2),
               (window_width / 2) - (turtle_width / 2) +
               turtle_width]
 
+score_location1 = [(0.75, 10), (0.67, 5), (0.6, 10), (0.52, 5), (0.45, 10),
+                   (0.37, 5), (0.3, 10), (0.22, 5), (0.15, 10), (-1, 0)]
+
+score_location2 = [(0.22, 10), (0.3, 5), (0.37, 10), (0.45, 5), (0.52, 10),
+                   (0.6, 5), (0.67, 10), (0.75, 5), (0.82, 10), (1, 0)]
+
 
 # Turtle sprtie definations
 class Turtle(pygame.sprite.Sprite):
@@ -24,8 +30,10 @@ class Turtle(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (turtle_width,
                                             turtle_height))
 
+        self.player_number = player_number
+
         # Flip the image if it is player 2
-        if (player_number == 2):
+        if (self.player_number == 2):
             self.image = pygame.transform.rotate(self.image, 180)
 
         # Initial coordinates
@@ -49,6 +57,10 @@ class Turtle(pygame.sprite.Sprite):
         # Increase in speed on movement in the direction
         self.movement_rate = 2
 
+        self.score = 0
+
+        self.current_locate = 0
+
     # Move the sprite according to speed
     def move(self):
 
@@ -64,6 +76,15 @@ class Turtle(pygame.sprite.Sprite):
             self.rect.top += self.speed[1]
             self.rect.bottom += self.speed[1]
 
+        if (self.player_number == 1):
+            if (self.rect.top <= score_location1[self.current_locate][0] * window_height):
+                self.score += score_location1[self.current_locate][1]
+                self.current_locate += 1
+        else:
+            if (self.rect.top >= score_location2[self.current_locate][0] * window_height):
+                self.score += score_location2[self.current_locate][1]
+                self.current_locate += 1
+
     # Resets coordinates and speed
     def reset(self):
 
@@ -74,3 +95,6 @@ class Turtle(pygame.sprite.Sprite):
 
         # Initial speed
         self.speed = [0, 0]
+
+        # Initialise score locater
+        self.current_locate = 0
