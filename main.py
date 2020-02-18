@@ -6,35 +6,18 @@ import fixedobstacleconfig
 import movingobstacleconfig
 from fixedobstacleconfig import fixed_obstacle_locations
 from movingobstacleconfig import moving_obstacle_locations
+from config import *
 
 pygame.init()
-
-# Color definations
-back = (0, 0, 0)
-river = (255, 247, 0)
-black = (0, 0, 0)
-
-# Game window dimensions
-window_width = 1920
-window_height = 1080
-
-# FPS
-frames_per_sec = 72
 
 # Player sprites
 player1 = turtleconfig.Turtle(1)
 player2 = turtleconfig.Turtle(2)
 
-# River locations from top
-river_locations = [window_height * 0.15, window_height * 0.3,
-                   window_height * 0.45, window_height * 0.6,
-                   window_height * 0.75]
-
 # Game window initialisations
 game_display = pygame.display.set_mode((window_width, window_height),
                                        pygame.FULLSCREEN)
 pygame.display.set_caption("Diglet Dungeon")
-
 
 # Game clock
 clock = pygame.time.Clock()
@@ -52,12 +35,8 @@ for object_location in fixed_obstacle_locations:
 # Moving obstacle sprite group
 moving_obstacles = []
 
-# Obstacle numbers based on level
-obstacles_on_level = [(6, 9), (9, 8), (9, 11)]
-
 # Current round
 current_level = 0
-
 
 # Initialise moving obstacle sprite group
 def moving_object_init():
@@ -85,7 +64,6 @@ def moving_object_init():
 # Call for initialisation of moving obstacles
 moving_object_init()
 
-
 # Exit condition checker
 game_exit = False
 
@@ -103,7 +81,7 @@ end_sprite = finishlineconfig.End(finishlineconfig.start_top_x,
 press_start = False
 
 # Load intro image
-intro_image = pygame.image.load("intro.jpeg")
+intro_image = pygame.image.load("data/intro.jpeg")
 intro_image_rect = intro_image.get_rect()
 
 # Display intro on the screen
@@ -281,7 +259,7 @@ else:
     winner = 2
 
 # Importing gameover image and drawing it
-ending_image = pygame.image.load("gameover.jpeg")
+ending_image = pygame.image.load("data/gameover.jpeg")
 ending_image_rect = ending_image.get_rect()
 game_display.blit(ending_image, ending_image_rect)
 

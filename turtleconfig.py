@@ -1,8 +1,5 @@
 import pygame
-
-# Window parameters
-window_width = 1920
-window_height = 1080
+from config import *
 
 # Turtle parameters
 turtle_width = 50
@@ -10,13 +7,6 @@ turtle_height = 50
 location_x = [(window_width / 2) - (turtle_width / 2),
               (window_width / 2) - (turtle_width / 2) +
               turtle_width]
-
-score_location1 = [(0.75, 10), (0.67, 5), (0.6, 10), (0.52, 5), (0.45, 10),
-                   (0.37, 5), (0.3, 10), (0.22, 5), (0.15, 10), (-1, 0)]
-
-score_location2 = [(0.22, 10), (0.3, 5), (0.37, 10), (0.45, 5), (0.52, 10),
-                   (0.6, 5), (0.67, 10), (0.75, 5), (0.82, 10), (1, 0)]
-
 
 # Turtle sprtie definations
 class Turtle(pygame.sprite.Sprite):
@@ -27,7 +17,7 @@ class Turtle(pygame.sprite.Sprite):
         super().__init__()
 
         # Load image and resize it
-        self.image = pygame.image.load("turtle.png")
+        self.image = pygame.image.load("data/turtle.png")
         self.image = pygame.transform.scale(self.image, (turtle_width,
                                             turtle_height))
 

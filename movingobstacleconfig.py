@@ -1,9 +1,6 @@
 import pygame
 import turtleconfig
-
-# Window parameters
-window_width = 1920
-window_height = 1080
+from config import *
 
 # Obstacle parameters
 obstacle_width = 70
@@ -61,7 +58,7 @@ class MovingObstacle(pygame.sprite.Sprite):
         super().__init__()
 
         # Load sprite image
-        self.image = pygame.image.load("moving_obstacle.png")
+        self.image = pygame.image.load("data/moving_obstacle.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()

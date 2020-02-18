@@ -2,10 +2,7 @@ import pygame
 from turtleconfig import location_x
 from turtleconfig import turtle_height
 from turtleconfig import turtle_width
-
-# Window parameters
-window_width = 1920
-window_height = 1080
+from config import *
 
 # Obstacle parameters
 obstacle_width = 50
@@ -27,7 +24,7 @@ class Start(pygame.sprite.Sprite):
         super().__init__()
 
         # Load image sprite and resize it
-        self.image = pygame.image.load("start.png")
+        self.image = pygame.image.load("data/start.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()
@@ -61,7 +58,7 @@ class End(pygame.sprite.Sprite):
         super().__init__()
 
          # Load image sprite and resize it
-        self.image = pygame.image.load("end.png")
+        self.image = pygame.image.load("data/end.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()

@@ -1,9 +1,6 @@
 import pygame
 import turtleconfig
-
-# Window parameters
-window_width = 1920
-window_height = 1080
+from config import *
 
 # Obstacle parameters
 obstacle_width = 70
@@ -153,7 +150,7 @@ class FixedObstacle(pygame.sprite.Sprite):
         super().__init__()
 
         # Load image for sprite
-        self.image = pygame.image.load("fixed_obstacle.png")
+        self.image = pygame.image.load("data/fixed_obstacle.png")
         self.image = pygame.transform.scale(self.image, (obstacle_width,
                                             obstacle_height))
         self.rect = self.image.get_rect()
