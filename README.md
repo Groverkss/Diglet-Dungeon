@@ -10,11 +10,17 @@ Run command to start game: **python3 main.py**
 
 # Glossary
 Data ---> Contains images and music for game  
+  
 config.py ---> Contains global variables required for game  
+  
 main.py ---> Contains main game loop  
+  
 fixedobstacle.py ---> Contains definations for fixed obstacles  
+  
 movingobstacle.py ---> Contains definations for moving obstacles  
+  
 turtle.py ---> Contains definations for player sprites  
+  
 utility.py ---> Contains utility functions required in main.py  
 
 # Instructions
