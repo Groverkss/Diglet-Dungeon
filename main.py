@@ -12,6 +12,7 @@ pygame.init()
 # Color definations
 back = (0, 0, 0)
 river = (255, 247, 0)
+black = (0, 0, 0)
 
 # Game window dimensions
 window_width = 1920
@@ -112,7 +113,7 @@ while not press_start:
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
             quit()
-        
+
         if (event.type == pygame.KEYDOWN):
             if (event.key == pygame.K_ESCAPE):
                 quit()
@@ -256,3 +257,41 @@ while not game_exit:
 
     pygame.display.update()
     clock.tick(frames_per_sec)
+
+if (player1.score > player2.score):
+    winner = 1
+elif (player1.score < player2.score):
+    winner = 2
+elif (player1.time < player2.time):
+    winner = 1
+else:
+    winner = 2
+
+ending_image = pygame.image.load("gameover.jpeg")
+ending_image_rect = ending_image.get_rect()
+game_display.blit(ending_image, ending_image_rect)
+
+font = pygame.font.Font(None, 80)
+if (winner == 1):
+    text = font.render("Player 1 wins with score: " + str(player1.score) +
+                       " and time: " + str(round(player1.time, 2)), 1, black)
+else:
+    text = font.render("Player 2 wins with score: " + str(player2.score) +
+                       " and time: " + str(round(player2.time, 2)), 1, black)
+textpos = text.get_rect(centerx=window_width * 0.5, centery=window_height *
+                        0.55)
+game_display.blit(text, textpos)
+
+pygame.display.update()
+
+# Game over exit condition
+press_exit = False
+
+# Game over screen
+while not press_exit:
+    for event in pygame.event.get():
+        if (event.type == pygame.QUIT):
+            quit()
+        if (event.type == pygame.KEYDOWN):
+            if (event.key == pygame.K_ESCAPE):
+                quit()
