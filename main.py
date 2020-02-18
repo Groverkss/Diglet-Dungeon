@@ -19,6 +19,9 @@ game_display = pygame.display.set_mode((window_width, window_height),
                                        pygame.FULLSCREEN)
 pygame.display.set_caption("Diglet Dungeon")
 
+pygame.mixer.music.load("data/music.mp3") 
+pygame.mixer.music.play(-1,0.0)
+
 # Game clock
 clock = pygame.time.Clock()
 
