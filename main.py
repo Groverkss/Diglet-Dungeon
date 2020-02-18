@@ -71,12 +71,13 @@ def moving_object_init():
                                                          object_location[1],
                                                          object_location[2])
         
+        # Increase speed on level 1
         if (current_level == 0):
             if (new_object.movement_direction == 1):
                 new_object.speed = 2
             else:
                 new_object.speed = -2
-        
+                
         moving_obstacles.append(new_object)
 
 
@@ -194,6 +195,11 @@ while not game_exit:
     font = pygame.font.Font(None, 36)
     text = font.render("Time:", 1, river)
     textpos = text.get_rect(centerx=window_width * 0.1, centery=50)
+    game_display.blit(text, textpos)
+
+    font = pygame.font.Font(None, 36)
+    text = font.render("Round: " + str(current_level + 1), 1, river)
+    textpos = text.get_rect(centerx=window_width * 0.25, centery=50)
     game_display.blit(text, textpos)
 
     font = pygame.font.Font(None, 36)
